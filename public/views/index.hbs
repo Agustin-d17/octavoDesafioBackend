@@ -1,0 +1,63 @@
+    <section class="m-5">
+        <h2>Ingrese su producto</h2>
+        <form action="/productos" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Nombre del producto</label><br>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio del producto</label><br>
+                <input type="number" class="form-control" id="price" name="price">
+            </div>
+
+            <div class="mb-3">
+                <label for="thumbnail" class="form-label">Url de la imagen</label><br>
+                <input type="text" class="form-control" id="thumbnail" name="thumbnail">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cargar producto</button>
+            <button class="btn btn-secondary "><a class="nav-link active" href="http://localhost:8000/productos">Ver productos</a></button>
+        </form>
+    </section>
+    <section class="m-5 chat">
+        <div class="messages container m-3" id="messagesDiv">
+
+        </div>
+        <form onsubmit="return addMessage(this)">
+            <input type="email" id="author" placeholder="Ingrese su email" autocomplete="off">
+            <input type="text" id="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+            <input type="submit" value="Enviar">
+        </form>
+    </section>
+    <section class="m-5">
+        {{#if data}}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products as |product|}}
+                        <tr>
+                            <td>
+                                {{product.title }}
+                            </td>
+                            <td>
+                                $ {{product.price}} 
+                            </td>
+                            <td><img src="{{product.thumbnail}}" class="w-25 h-auto"></td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <div class="alert alert-danger" role="alert">
+                <p>No hay productos</p>
+            </div>
+        {{/if}}
+            <button class="btn btn-secondary "><a class="nav-link active" href="http://localhost:8000">Nuevo producto</a></button>
+    </section>
