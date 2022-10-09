@@ -1,6 +1,6 @@
     <section class="m-5">
         <h2>Ingrese su producto</h2>
-        <form action="/productos" method="post">
+        <form action="/api/productos" method="post">
             <div class="mb-3">
                 <label for="title" class="form-label">Nombre del producto</label><br>
                 <input type="text" class="form-control" id="title" name="title">
@@ -17,7 +17,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Cargar producto</button>
-            <button class="btn btn-secondary "><a class="nav-link active" href="http://localhost:8000/productos">Ver productos</a></button>
+            <button class="btn btn-secondary "><a class="nav-link active" href="http://localhost:8000/api/productos">Ver productos</a></button>
         </form>
     </section>
     <section class="m-5 chat">

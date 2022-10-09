@@ -13,16 +13,16 @@ const io = new IOServer(httpServer)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static('../public'))
+app.use(express.static('./public'))
 
 app.engine('hbs', hbs.engine({
     extname: '.hbs',
-    partialsDir: '../public/views/partials',
-    layoutsDir: '../public/views/layouts',
+    partialsDir: './views/partials',
+    layoutsDir: './views/layouts',
     defaultLayout: 'layout.hbs'
 }));
 
-app.set('views', '../public/views')
+app.set('views', './views')
 app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use('/productos', router)
+app.use('/api/productos', router)
 
 const PORT = 8000
 const server = httpServer.listen(PORT, () => {

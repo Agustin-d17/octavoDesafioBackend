@@ -17,15 +17,17 @@ class Contenedor {
 
     async save(obj){
         const content = await this.readFile();
+        // console.log(content.length !== 0)
         
-            if (content.length !== 0){
-                let newId = parseInt(content[content.length - 1].id) + 1
-                await fs.promises.writeFile(this.file, JSON.stringify([...content, {...obj, id: `${newId}`}]), 'utf8');
-                console.log(`id del elemento agregado: ${newId}`)
-            }else{
-                await fs.promises.writeFile(this.file, JSON.stringify([{...obj, id: "1"}]), 'utf8');
-                console.log(`id del elemento agregado: ${1}`)
-            }
+        // console.log()
+        if (content.length !== 0){
+            let newId = parseInt(content[content.length - 1].id) + 1
+            await fs.promises.writeFile(this.file, JSON.stringify([...content, {...obj, id: `${newId}`}]), 'utf8');
+            console.log(`id del elemento agregado: ${newId}`)
+        }else{
+            await fs.promises.writeFile(this.file, JSON.stringify([{...obj, id: "1"}]), 'utf8');
+            console.log(`id del elemento agregado: ${1}`)
+        }
 
     }
 
