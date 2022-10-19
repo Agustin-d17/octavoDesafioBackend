@@ -35,5 +35,4 @@ const addMessage = (e) => {
 
 socket.on('messages', data => {
     render(data)
-    
 })
