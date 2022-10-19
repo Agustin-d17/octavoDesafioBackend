@@ -2,8 +2,8 @@ const express = require('express')
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
 const hbs = require('express-handlebars')
-const content = require('./models/content')
-const router = require('./routes/expressRoutes')
+const productsContent = require('./models/productsContent.js')
+const productsRouter = require('./routes/productsRouter')
 
 
 
@@ -27,7 +27,7 @@ app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
     data = false
-    content.getAll()
+    productsContent.getData()
     .then((response) => {
         if(response.length !== 0){
             data = true
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use('/api/productos', router)
+app.use('/api/productos', productsRouter)
 
 const PORT = 8000
 const server = httpServer.listen(PORT, () => {
@@ -48,7 +48,7 @@ const server = httpServer.listen(PORT, () => {
 const messages = []
 
 io.on('connection',(socket) => {
-    console.log('A new client has connected')
+    // console.log('A new client has connected')
     socket.emit('messages', messages)
 
     socket.on('new-message', (message) => {

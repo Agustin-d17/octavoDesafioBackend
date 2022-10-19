@@ -12,9 +12,8 @@ const products = [
     {title:"Monitor",price:"25",thumbnail:"https://cdn0.iconfinder.com/data/icons/devices-42/512/Normal_LCD-256.png","id":"5"}
 ]
 
-productsContent.createTable()
-products.forEach(product => productsContent.insertProduct(product))
-
+// productsContent.createTable()
+// products.forEach(product => productsContent.insertProduct(product))
 
 module.exports = productsContent
 

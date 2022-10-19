@@ -13,28 +13,32 @@ class DataBase {
         })
         .then(() => console.log('Tabla creada'))
         .catch(error => console.log(error))
-        .finally(() => this.knex.destroy())
     }
 
     async insertProduct(product){
         await this.knex(this.table).insert(product)
         .then(() => console.log('Producto agregado correctamente'))
         .catch((error) => console.log(error))
-        .finally(() => this.knex.destroy())
     }
 
     async getData(){
-        await this.knex.from(this.table).select('*')
-        .then(data => {return data})
-        .catch(error => console.log(error))
-        .finally(() => this.knex.destroy())
+        try{
+            const content = await this.knex.from(this.table).select('*')
+            return content
+        }catch(error) {
+            console.log(error)
+        } 
+    
     }
 
     async getById(id){
-        await this.knex.from(this.table).select('*').where('id', '=', id)
-        .then(data => {return data})
-        .catch(error => console.log(error))
-        .finally(() => this.knex.destroy())
+        try{
+            const element = await this.knex.from(this.table).select('*').where('id', '=', id)
+        
+            return element
+        }catch(err){
+            console.log(err)
+        }
     }
 }
 
