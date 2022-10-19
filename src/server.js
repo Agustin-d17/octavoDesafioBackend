@@ -4,7 +4,7 @@ const { Server: IOServer } = require('socket.io')
 const hbs = require('express-handlebars')
 const productsContent = require('./models/productsContent.js')
 const productsRouter = require('./routes/productsRouter')
-
+const messagesContent = require('./models/messagesContent.js')
 
 
 const app = express()
@@ -45,14 +45,20 @@ const server = httpServer.listen(PORT, () => {
     console.log(`Listening on port ${server.address().port}`)
 })
 
-const messages = []
+// const messages = []
 
 io.on('connection',(socket) => {
     // console.log('A new client has connected')
-    socket.emit('messages', messages)
+    // socket.emit('messages', {messages})
+    messagesContent.getData()
+    .then(response => {socket.emit('messages', response)})
+    
 
-    socket.on('new-message', (message) => {
-        messages.push(message);
-        io.sockets.emit('messages', messages)
+    socket.on('new-message', async (message) => {
+        // messages.push(message);
+        // io.sockets.emit('messages', {messages})
+        await messagesContent.insertMessage(message)
+        messagesContent.getData()
+        .then(response => {io.sockets.emit('messages', response)})
     })
 })
