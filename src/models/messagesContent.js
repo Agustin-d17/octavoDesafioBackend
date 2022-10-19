@@ -1,4 +1,4 @@
-const {options} = require('../config/sqliteConfig.js')
+const {options} = require('../sqliteConfig.js')
 const knex = require('knex')(options)
 const MessagesDB = require('../controllers/messagesDB.js')
 
